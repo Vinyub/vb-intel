@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VB Intel · SAT 28 MAR 2569</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══ THEMES ═══ */
+body.theme-dark{--bg:#0a0a0a;--bg2:#111;--bg3:#181818;--bg4:#202020;--border:#2a2a2a;--border2:#383838;--text:#f0f0f0;--text2:#aaa;--text3:#666;--accent:#f5a623;--accent2:#e8931a;--live:#ff4444;--gold:#ffc107;--orange:#ff7a35;--topbar:#0d0d0d;--sidebar:#0f0f0f;--card-bg:#141414;--search-bg:#161616;--ins-bg:rgba(245,166,35,.07);--ins-border:rgba(245,166,35,.18);--ins-text:#c8943a;--ts-bg:rgba(255,255,255,.05);--ts-text:#888;}
+body.theme-white{--bg:#f0f0f0;--bg2:#fff;--bg3:#eee;--bg4:#e0e0e0;--border:#ddd;--border2:#bbb;--text:#111;--text2:#555;--text3:#999;--accent:#c4780a;--accent2:#a86408;--live:#d42020;--gold:#c49000;--orange:#c45010;--topbar:#fff;--sidebar:#f5f5f5;--card-bg:#fff;--search-bg:#ebebeb;--ins-bg:rgba(180,120,10,.07);--ins-border:rgba(180,120,10,.2);--ins-text:#7a4e00;--ts-bg:rgba(0,0,0,.05);--ts-text:#888;}
+
+:root{--cat-marketing:#ff9500;--cat-media:#4a9eff;--cat-business:#3dcc6e;--cat-thailand:#ff6b35;--cat-branding:#b06eff;--cat-economics:#6c63ff;--cat-gadgets:#00d4cc;--cat-ai:#ff3366;--cat-social:#ffd600;--cat-agency:#8e8e93;}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);font-size:16.8px;line-height:1.65;min-height:100vh;overflow-x:hidden;transition:background .25s,color .25s;}
+
+/* TOP BAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:52px;background:var(--topbar);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;transition:background .25s;}
+.logo{font-family:'Space Mono',monospace;font-size:18px;font-weight:700;letter-spacing:-.5px;flex-shrink:0;z-index:1;}
+.logo-vb{color:var(--text);}
+.logo-intel{color:var(--accent);}
+
+/* Clock — absolute center */
+.topbar-clock-wrap{position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;pointer-events:none;}
+.topbar-date{font-family:'Space Mono',monospace;font-size:8.5px;color:var(--text3);letter-spacing:1px;white-space:nowrap;}
+.topbar-time{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--accent);letter-spacing:2px;white-space:nowrap;}
+
+.topbar-right{display:flex;align-items:center;gap:6px;flex-shrink:0;z-index:1;}
+
+/* THEME SWITCHER — 2 themes only */
+.theme-sw{display:flex;align-items:center;gap:3px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:3px;}
+.tbtn{width:30px;height:30px;border-radius:5px;border:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .15s;background:transparent;color:var(--text3);}
+.tbtn:hover{background:var(--bg4);color:var(--text);}
+.tbtn.on{background:var(--accent);color:#000;}
+
+.btn{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);font-family:'Sarabun',sans-serif;transition:all .15s;white-space:nowrap;}
+.btn:hover{background:var(--bg4);color:var(--text);}
+.btn-p{background:var(--accent);color:#000;border-color:var(--accent);font-weight:700;}
+.btn-p:hover{background:var(--accent2);}
+
+/* TABS */
+.cattabs{display:flex;align-items:center;padding:0 20px;background:var(--topbar);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;transition:background .25s;}
+.cattabs::-webkit-scrollbar{display:none;}
+.ctab{padding:13px 13px;font-size:10px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:var(--text3);cursor:pointer;border-bottom:2.5px solid transparent;white-space:nowrap;transition:all .15s;font-family:'Space Mono',monospace;user-select:none;}
+.ctab:hover{color:var(--text2);}
+.ctab.on{color:var(--text);border-bottom-color:var(--accent);}
+.ctab.live{color:var(--live);}
+.ctab.live.on{border-bottom-color:var(--live);}
+.ldot{display:inline-block;width:6px;height:6px;background:var(--live);border-radius:50%;margin-right:5px;animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* LAYOUT */
+.layout{display:flex;height:calc(100vh - 106px);}
+
+/* SIDEBAR */
+.sidebar{width:205px;min-width:205px;background:var(--sidebar);border-right:1px solid var(--border);padding:18px 12px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;transition:background .25s;}
+.slabel{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--text3);text-transform:uppercase;margin-bottom:8px;padding-left:4px;}
+.ssect{margin-bottom:22px;}
+.sitem{display:flex;align-items:center;justify-content:space-between;padding:7px 9px;border-radius:8px;cursor:pointer;margin-bottom:2px;transition:all .12s;color:var(--text2);font-size:13px;user-select:none;}
+.sitem:hover{background:var(--bg3);color:var(--text);}
+.sitem.on{background:rgba(245,166,35,.12);color:var(--accent);}
+.sitem-l{display:flex;align-items:center;gap:7px;}
+.sdot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.scnt{font-family:'Space Mono',monospace;font-size:10px;color:var(--text3);background:var(--bg4);padding:2px 6px;border-radius:10px;}
+.sitem.on .scnt{background:rgba(245,166,35,.15);color:var(--accent);}
+
+/* MAIN */
+.main{flex:1;overflow-y:auto;padding:20px 22px;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;}
+.mhead{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;}
+.plabel{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2.5px;color:var(--text3);text-transform:uppercase;margin-bottom:4px;}
+.mtitle{font-size:23px;font-weight:700;letter-spacing:-.3px;}
+.cnum{font-family:'Space Mono',monospace;font-size:33px;font-weight:700;color:var(--accent);line-height:1;text-align:right;}
+.clabel{font-size:11px;color:var(--text3);text-align:right;margin-top:2px;}
+
+/* SEARCH */
+.swrap{position:relative;margin-bottom:12px;}
+.sico{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:14px;}
+.sinput{width:100%;background:var(--search-bg);border:1px solid var(--border);border-radius:10px;padding:11px 16px 11px 38px;color:var(--text);font-size:14.5px;font-family:'Sarabun',sans-serif;outline:none;transition:border .15s,background .25s;}
+.sinput::placeholder{color:var(--text3);}
+.sinput:focus{border-color:var(--border2);}
+
+/* THEMES PANEL */
+.tpanel{background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:18px;overflow:hidden;transition:background .25s;}
+.thead2{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;cursor:pointer;user-select:none;}
+.thead2-l{display:flex;align-items:center;gap:7px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--text3);text-transform:uppercase;}
+.tbolt{color:var(--accent);}
+.tarr{color:var(--text3);font-size:10px;transition:transform .2s;}
+.tarr.op{transform:rotate(180deg);}
+.tbody2{display:none;padding:0 14px 14px;grid-template-columns:repeat(3,1fr);gap:7px;}
+.tbody2.op{display:grid;}
+.ttag{background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:8px 10px;font-size:12px;color:var(--text2);cursor:pointer;transition:all .12s;}
+.ttag:hover{background:var(--bg4);color:var(--text);}
+.ttag .tl{font-weight:600;font-size:12.5px;margin-bottom:1px;}
+.ttag .td{font-size:11px;color:var(--text3);}
+
+/* SECTION DIVIDER */
+.sdiv{display:flex;align-items:center;gap:8px;margin:18px 0 12px;}
+.sbadge{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:20px;font-size:11.5px;font-weight:700;}
+.sbadge.th{background:rgba(255,107,53,.14);color:#ff6b35;border:1px solid rgba(255,107,53,.3);}
+.sbadge.gl{background:rgba(74,158,255,.1);color:var(--cat-media);border:1px solid rgba(74,158,255,.25);}
+
+/* GRID */
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:6px;}
+
+/* CARD */
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;overflow:hidden;position:relative;transition:transform .18s,box-shadow .18s,border-color .18s,background .25s;cursor:pointer;display:flex;flex-direction:column;}
+.card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,0,0,.3);}
+.card.sv{border-color:rgba(255,193,7,.3);}
+.ctopbar{height:3px;width:100%;flex-shrink:0;}
+.cimgwrap{position:relative;width:100%;height:140px;overflow:hidden;flex-shrink:0;background:var(--bg3);}
+.cimgwrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease;}
+.card:hover .cimgwrap img{transform:scale(1.05);}
+.cimgwrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 45%,rgba(0,0,0,.6) 100%);pointer-events:none;}
+.ccat{position:absolute;top:9px;left:9px;z-index:2;display:flex;align-items:center;gap:4px;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);border-radius:5px;padding:3px 7px;}
+.ccl{font-family:'Space Mono',monospace;font-size:8px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;}
+.ccf{font-size:11px;}
+.pinbadge{position:absolute;top:9px;right:9px;z-index:3;width:26px;height:26px;background:var(--orange);border-radius:6px;display:none;align-items:center;justify-content:center;font-size:12px;}
+.card.pn .pinbadge{display:flex;}
+.cinner{padding:12px 14px 14px;flex:1;display:flex;flex-direction:column;}
+.cmeta{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.csrc-wrap{display:flex;flex-direction:column;gap:1px;flex:1;min-width:0;}
+.csrc{font-family:'Space Mono',monospace;font-size:10px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+/* TIMESTAMP */
+.cts{display:inline-flex;align-items:center;gap:4px;background:var(--ts-bg);border-radius:4px;padding:2px 6px;font-family:'Space Mono',monospace;font-size:9px;color:var(--ts-text);letter-spacing:.3px;width:fit-content;}
+
+.cacts{display:flex;align-items:center;gap:4px;flex-shrink:0;margin-left:6px;}
+.cabt{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;background:transparent;border:none;color:var(--text3);transition:all .12s;}
+.cabt:hover{background:var(--bg3);color:var(--text2);}
+.cabt.sv{color:var(--gold);}
+.cabt.pn{color:var(--orange);}
+.chead{font-size:15px;font-weight:700;line-height:1.42;color:var(--text);margin-bottom:9px;flex:1;}
+.chead a{color:inherit;text-decoration:none;}
+.chead a:hover{color:var(--accent);}
+.csum{font-size:13.5px;color:var(--text2);line-height:1.65;margin-bottom:11px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.cins{background:var(--ins-bg);border:1px solid var(--ins-border);border-radius:8px;padding:9px 11px;font-size:12.5px;color:var(--ins-text);line-height:1.6;}
+.ilabel{font-weight:700;color:var(--accent);margin-right:3px;}
+
+/* CLIP LINK */
+.cclip{display:inline-flex;align-items:center;gap:5px;margin-top:9px;padding:5px 10px;background:rgba(255,214,0,.1);border:1px solid rgba(255,214,0,.25);border-radius:6px;font-size:12px;color:var(--gold);text-decoration:none;font-weight:600;}
+.cclip:hover{background:rgba(255,214,0,.18);}
+
+/* EMPTY */
+.empty{text-align:center;padding:60px 20px;color:var(--text3);}
+.eico{font-size:36px;margin-bottom:12px;}
+.etitle{font-size:17px;font-weight:600;color:var(--text2);margin-bottom:6px;}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;right:22px;background:var(--bg4);border:1px solid var(--border2);border-radius:10px;padding:11px 16px;font-size:14px;color:var(--text);z-index:9999;opacity:0;transform:translateY(8px);transition:all .22s;pointer-events:none;}
+.toast.show{opacity:1;transform:translateY(0);}
+
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+
+/* ═══ MOBILE ≤768px ═══ */
+/* ═══ MODALS ═══ */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
+.modal-overlay.show{display:flex;}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;width:100%;max-width:520px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.5);}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 14px;border-bottom:1px solid var(--border);}
+.modal-title{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.5px;color:var(--text);}
+.modal-close{width:30px;height:30px;border-radius:7px;border:none;background:var(--bg3);color:var(--text3);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.modal-close:hover{background:var(--bg4);color:var(--text);}
+.modal-body{padding:20px;}
+.modal-label{font-size:12px;color:var(--text3);margin-bottom:7px;font-family:'Space Mono',monospace;letter-spacing:.3px;text-transform:uppercase;}
+.modal-input{width:100%;background:var(--search-bg);border:1px solid var(--border);border-radius:9px;padding:12px 14px;color:var(--text);font-size:15px;font-family:'Sarabun',sans-serif;outline:none;transition:border .15s;margin-bottom:10px;}
+.modal-input:focus{border-color:var(--accent);}
+.modal-hint{font-size:12px;color:var(--text3);margin-bottom:14px;line-height:1.6;}
+.modal-foot{display:flex;gap:8px;justify-content:flex-end;padding:0 20px 18px;}
+.mbtn{padding:9px 18px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;border:none;font-family:'Sarabun',sans-serif;transition:all .15s;}
+.mbtn.cancel{background:var(--bg3);color:var(--text2);}
+.mbtn.cancel:hover{background:var(--bg4);}
+.mbtn.go{background:var(--accent);color:#000;}
+.mbtn.go:hover{background:var(--accent2);}
+.mbtn:disabled{opacity:.45;cursor:not-allowed;}
+.mstatus{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:13px;color:var(--text2);min-height:44px;line-height:1.65;display:none;margin-bottom:12px;white-space:pre-wrap;word-break:break-all;}
+.mstatus.show{display:block;}
+.mstatus.err{border-color:rgba(255,68,68,.3);color:#ff8888;background:rgba(255,68,68,.05);}
+.mstatus.ok{border-color:rgba(61,204,110,.3);color:#5ddd8a;background:rgba(61,204,110,.05);}
+.spin{display:inline-block;width:13px;height:13px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.rss-list{max-height:200px;overflow-y:auto;margin-bottom:12px;display:none;}
+.rss-list.show{display:block;}
+.rss-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;cursor:pointer;transition:background .12s;border:1px solid transparent;margin-bottom:3px;}
+.rss-item:hover{background:var(--bg3);}
+.rss-item.sel{background:rgba(245,166,35,.1);border-color:rgba(245,166,35,.25);}
+.rss-chk{width:16px;height:16px;border-radius:4px;border:2px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;color:#000;}
+.rss-item.sel .rss-chk{background:var(--accent);border-color:var(--accent);}
+.rss-info{flex:1;min-width:0;}
+.rss-ttl{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rss-src{font-size:11px;color:var(--text3);font-family:'Space Mono',monospace;}
+
+@media(max-width:768px){
+  body{font-size:15px;}
+  .layout{height:auto;flex-direction:column;}
+  .sidebar{display:none;}
+  .main{padding:12px 12px 80px;height:auto;overflow-y:visible;}
+  .topbar{padding:0 12px;height:50px;}
+  .topbar-date{display:none;}
+  .topbar-time{font-size:12px;letter-spacing:1.5px;}
+  .logo{font-size:16px;}
+  .btn{padding:5px 8px;font-size:11px;}
+  .tbtn{width:26px;height:26px;font-size:12px;}
+  .cattabs{padding:0 8px;}
+  .ctab{padding:10px 9px;font-size:8.5px;letter-spacing:.8px;}
+  .cgrid{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .cimgwrap{height:100px;}
+  .chead{font-size:13px;line-height:1.35;margin-bottom:6px;}
+  .csum{font-size:12px;-webkit-line-clamp:2;margin-bottom:7px;}
+  .cins{font-size:11px;padding:6px 9px;}
+  .csrc{font-size:9.5px;}
+  .cts{font-size:8.5px;}
+  .cmeta{margin-bottom:5px;}
+  .mtitle{font-size:18px;}
+  .cnum{font-size:26px;}
+  .mhead{margin-bottom:10px;}
+  .tbody2{grid-template-columns:repeat(2,1fr);}
+  .sinput{font-size:14px;padding:10px 14px 10px 36px;}
+  .sbadge{font-size:11px;padding:3px 9px;}
+  .sdiv{margin:12px 0 8px;}
+  .cabt{width:24px;height:24px;font-size:11px;}
+  .mobnav{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--topbar);border-top:1px solid var(--border);padding:6px 8px 8px;gap:4px;overflow-x:auto;scrollbar-width:none;z-index:150;-webkit-overflow-scrolling:touch;transition:background .25s;}
+  .mobnav::-webkit-scrollbar{display:none;}
+  .mnbtn{display:flex;flex-direction:column;align-items:center;gap:1px;padding:4px 8px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);color:var(--text3);font-size:8.5px;font-family:'Space Mono',monospace;font-weight:700;letter-spacing:.4px;cursor:pointer;white-space:nowrap;transition:all .12s;min-width:44px;text-transform:uppercase;}
+  .mnbtn .mi{font-size:14px;}
+  .mnbtn.on{background:var(--accent);color:#000;border-color:var(--accent);}
+}
+@media(max-width:480px){
+  .cgrid{grid-template-columns:1fr;gap:10px;}
+  .cimgwrap{height:130px;}
+  .chead{font-size:14px;}
+  .csum{font-size:12.5px;}
+}
+@media(min-width:769px){.mobnav{display:none;}}
+@media(min-width:769px) and (max-width:1100px){.cgrid{grid-template-columns:repeat(2,1fr);}.sidebar{width:185px;min-width:185px;}}
+</style>
+</head>
+<body class="theme-dark">
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="logo"><span class="logo-vb">VB </span><span class="logo-intel">Intel</span></div>
+  <div class="topbar-clock-wrap">
+    <div class="topbar-date" id="topbar-date">SAT 28 MAR 2569</div>
+    <div class="topbar-time" id="clock">--:--:--</div>
+  </div>
+  <div class="topbar-right">
+    <div class="theme-sw">
+      <button class="tbtn on" id="btn-dark"  onclick="setTheme('dark')"  title="Dark">🌙</button>
+      <button class="tbtn"    id="btn-white" onclick="setTheme('white')" title="White">☀️</button>
+    </div>
+    <button class="btn" onclick="openImport()">⬇ Import RSS</button>
+    <button class="btn btn-p" onclick="openAdd()">+ Add URL</button>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="cattabs">
+  <div class="ctab live on" data-f="all"><span class="ldot"></span>LIVE</div>
+  <div class="ctab" data-f="marketing">MARKETING</div>
+  <div class="ctab" data-f="media">MEDIA & TECH</div>
+  <div class="ctab" data-f="business">BUSINESS</div>
+  <div class="ctab" data-f="thailand">THAILAND</div>
+  <div class="ctab" data-f="branding">BRANDING</div>
+  <div class="ctab" data-f="economics">ECONOMICS</div>
+  <div class="ctab" data-f="gadgets">GADGETS</div>
+  <div class="ctab" data-f="ai">AI</div>
+  <div class="ctab" data-f="social">SOCIAL</div>
+  <div class="ctab" data-f="agency">AGENCY</div>
+  <div class="ctab" data-f="saved">⭐ SAVED</div>
+  <div class="ctab" data-f="pinned">📌 PINNED</div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+  <div class="sidebar">
+    <div class="ssect">
+      <div class="slabel">View By</div>
+      <div class="sitem on" data-f="all"><div class="sitem-l"><div class="sdot" style="background:#888"></div>All Articles</div><div class="scnt" id="c-all">29</div></div>
+      <div class="sitem" data-f="saved"><div class="sitem-l"><div class="sdot" style="background:var(--gold)"></div>⭐ Saved</div><div class="scnt" id="c-saved">0</div></div>
+      <div class="sitem" data-f="pinned"><div class="sitem-l"><div class="sdot" style="background:var(--orange)"></div>📌 Pinned</div><div class="scnt" id="c-pinned">0</div></div>
+    </div>
+    <div class="ssect">
+      <div class="slabel">Category</div>
+      <div class="sitem" data-f="marketing"><div class="sitem-l"><div class="sdot" style="background:var(--cat-marketing)"></div>Marketing</div><div class="scnt" id="c-marketing">4</div></div>
+      <div class="sitem" data-f="media"><div class="sitem-l"><div class="sdot" style="background:var(--cat-media)"></div>Media & Tech</div><div class="scnt" id="c-media">3</div></div>
+      <div class="sitem" data-f="business"><div class="sitem-l"><div class="sdot" style="background:var(--cat-business)"></div>Business</div><div class="scnt" id="c-business">2</div></div>
+      <div class="sitem" data-f="thailand"><div class="sitem-l"><div class="sdot" style="background:var(--cat-thailand)"></div>Thailand Local</div><div class="scnt" id="c-thailand">3</div></div>
+      <div class="sitem" data-f="branding"><div class="sitem-l"><div class="sdot" style="background:var(--cat-branding)"></div>Branding</div><div class="scnt" id="c-branding">3</div></div>
+      <div class="sitem" data-f="economics"><div class="sitem-l"><div class="sdot" style="background:var(--cat-economics)"></div>Economics</div><div class="scnt" id="c-economics">3</div></div>
+      <div class="sitem" data-f="gadgets"><div class="sitem-l"><div class="sdot" style="background:var(--cat-gadgets)"></div>Gadgets</div><div class="scnt" id="c-gadgets">2</div></div>
+      <div class="sitem" data-f="ai"><div class="sitem-l"><div class="sdot" style="background:var(--cat-ai)"></div>AI Use Cases</div><div class="scnt" id="c-ai">4</div></div>
+      <div class="sitem" data-f="social"><div class="sitem-l"><div class="sdot" style="background:var(--cat-social)"></div>Social & Viral</div><div class="scnt" id="c-social">3</div></div>
+      <div class="sitem" data-f="agency"><div class="sitem-l"><div class="sdot" style="background:var(--cat-agency)"></div>Agency Moves</div><div class="scnt" id="c-agency">2</div></div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="mhead">
+      <div><div class="plabel">VB Intelligence Portal</div><div class="mtitle" id="mtitle">All Articles</div></div>
+      <div><div class="cnum" id="vcnt">29</div><div class="clabel">articles</div></div>
+    </div>
+    <div class="swrap">
+      <span class="sico">🔍</span>
+      <input class="sinput" type="text" id="search" placeholder="Search articles..." autocomplete="off">
+    </div>
+    <div class="tpanel">
+      <div class="thead2" id="tpanel-toggle">
+        <div class="thead2-l"><span class="tbolt">⚡</span><span>STRATEGIC THEMES · THIS VIEW</span></div>
+        <span class="tarr" id="tarr">▼</span>
+      </div>
+      <div class="tbody2" id="tbody2">
+        <div class="ttag"><div class="tl">🏎 AI Agentic Tools</div><div class="td">Claude Computer Use, Cowork, Dispatch</div></div>
+        <div class="ttag"><div class="tl">📢 AI-Powered Campaigns</div><div class="td">Honda AI GEN, Gen AI creatives</div></div>
+        <div class="ttag"><div class="tl">🎨 Culture-Driven Mktg</div><div class="td">Fandom, Soft Power, SEA Pride</div></div>
+        <div class="ttag"><div class="tl">🏛 Holdco Consolidation</div><div class="td">WPP, Dentsu, OpenPath fallout</div></div>
+        <div class="ttag"><div class="tl">📺 OOH Renaissance</div><div class="td">ไทย ad spend rebalance back to brand</div></div>
+        <div class="ttag"><div class="tl">🌀 Social Nostalgia Wave</div><div class="td">Pokémon 30th, Harry Styles, Kiki IMAX</div></div>
+      </div>
+    </div>
+    <div id="articles"></div>
+    <div class="empty" id="empty" style="display:none"><div class="eico">🔍</div><div class="etitle">No articles found</div><div>ลองค้นหาหรือเลือก filter ใหม่</div></div>
+  </div>
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobnav">
+  <div class="mnbtn on" data-f="all"><span class="mi">📰</span>ALL</div>
+  <div class="mnbtn" data-f="marketing"><span class="mi">📢</span>MKT</div>
+  <div class="mnbtn" data-f="media"><span class="mi">📡</span>MEDIA</div>
+  <div class="mnbtn" data-f="thailand"><span class="mi">🇹🇭</span>TH</div>
+  <div class="mnbtn" data-f="ai"><span class="mi">🤖</span>AI</div>
+  <div class="mnbtn" data-f="social"><span class="mi">🎬</span>SOCIAL</div>
+  <div class="mnbtn" data-f="agency"><span class="mi">🏢</span>AGENCY</div>
+  <div class="mnbtn" data-f="saved"><span class="mi">⭐</span>SAVED</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────
+var DATA = [
+  // ── MARKETING ──
+  {id:1,cat:"marketing",cl:"MARKETING",fl:"🇹🇭",or:"thai",
+   img:"https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=480&h=240&fit=crop",
+   ts:"25 มี.ค. 2569 · 10:24",
+   h:"Hakuhodo Bangkok x Honda ไทย เปิดตัว 'Honda: AI GEN' — ผู้ใช้ Upload รูปตัวเอง สร้าง Personalized Visual อยู่กับ Honda e:N2",
+   u:"https://campaignbriefasia.com/2026/03/25/honda-thailand-and-hakuhodo-bangkok-launch-ai-powered-gen-z-focused-campaign-for-honda-en2/",
+   s:"Campaign Brief Asia",
+   sm:"Hakuhodo Bangkok ร่วมกับ Honda Thailand เปิดตัวแคมเปญ 'Future Activated' สำหรับ Honda e:N2 ใช้ Generative AI (Google AI + Nano Banana) ให้ผู้ใช้อัปโหลดรูปตัวเองสร้าง personalized visuals แบบ real-time ข้ามกำแพง traditional product-led automotive launch สู่ participatory experience รุ่น Gen Z",
+   ins:"งานชิ้นนี้ของ Hakuhodo เอง — เป็น case ที่ใช้ pitch ลูกค้าใหม่ในประเด็น AI-led campaign ได้ทันที insight: Gen AI ไม่ใช่แค่เพิ่ม efficiency แต่เปลี่ยน brand touchpoint เป็น 2-way co-creation"},
+
+  {id:2,cat:"marketing",cl:"MARKETING",fl:"🇹🇭",or:"thai",
+   img:"https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=480&h=240&fit=crop",
+   ts:"13 มี.ค. 2569 · ตลอดเดือน",
+   h:"Central Pattana 'Summer Fest 2026: Sound of Summer' — Fandom + Soft Power + BL Actor เป็น Summer Boy Ambassadors",
+   u:"https://marketech-apac.com/central-pattana-leverages-fandom-and-thai-soft-power-in-new-nationwide-summer-campaign/",
+   s:"MARKETECH APAC",
+   sm:"Central Pattana จัดแคมเปญ Summer Fest 2026 (13 มี.ค.–10 พ.ค.) ทั่วประเทศ รวม BL actors Keng, Namping, Tle, FirstOne เป็น 'Summer Boy Ambassadors' ผสาน fandom culture, pickleball, Thai illustrators และ retail experience เชื่อม music-fashion-art-food ไว้ในงานเดียว CMO ตั้งเป้า 'transform fandom into economic value'",
+   ins:"Model 'Celebrity-Fandom-Retail' กลายเป็น template ของ experiential campaigns ไทยปี 2569 — ลูกค้า FMCG อย่าง MinorFood มีโอกาสเป็น F&B partner ในงานลักษณะนี้"},
+
+  {id:3,cat:"marketing",cl:"MARKETING",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1556761175-4b46a572b786?w=480&h=240&fit=crop",
+   ts:"13 มี.ค. 2569 · 09:31",
+   h:"Toss Securities 'A Blessing for Humanity' ฉลอง 5 ปี — AI วิเคราะห์ข้อมูลให้นักลงทุน รายย่อยได้รับ insight จาก AI เหมือน pro",
+   u:"https://www.asiae.co.kr/en/article/2026031309314102797",
+   s:"The Asia Business Daily",
+   sm:"Toss Securities เปิดตัวแคมเปญ Brand ฉลอง 5 ปี service launch ธีม 'Empowering Everyone to Invest' ใช้ AI service วิเคราะห์ข้อมูลซับซ้อนให้นักลงทุนรายย่อยได้รับเฉพาะข้อมูลที่ตัดสินใจได้จริง เผยแพร่ผ่าน TV, YouTube, Billboard ทั่ว Seoul",
+   ins:"Fintech brand ใช้ AI เป็น 'democratization hero' ไม่ใช่ tech story — สำหรับ AIA ไทย ประเด็น AI ช่วย mass market เข้าถึง financial planning เป็น narrative ที่ resonate มากในปี 2569"},
+
+  {id:4,cat:"marketing",cl:"MARKETING",fl:"🇹🇭",or:"thai",
+   img:"https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=480&h=240&fit=crop",
+   ts:"25 มี.ค. 2569",
+   h:"SMARTIES™ Thailand 2026 เปิดรับผลงาน — ชนะ = ติด WARC Media 100 + MMA Business Impact Index",
+   u:"https://www.thailand-business-news.com/pr-news/smarties-2026-where-marketing-excellence-meets-real-world-impact-thailand-now-is-your-time-to-shine",
+   s:"Thailand Business News",
+   sm:"MMA เปิดรับสมัคร SMARTIES™ Thailand 2026 framework ใหม่ครอบคลุม Purpose-Driven, Data-Driven Creativity และ Integrated Commerce งานที่ชนะจะถูกระบุใน RECMA, MMA SMARTIES Business Impact Index และ WARC Media 100 — ซึ่งใช้เป็น credential ระดับ regional ได้",
+   ins:"โอกาสสำคัญ submit งาน Hakuhodo ที่ทำให้ ThaiBev/AIA/MinorFood — WARC ranking มีน้ำหนักมากใน APAC credential pitch ปี 2570"},
+
+  // ── BRANDING ──
+  {id:5,cat:"branding",cl:"BRANDING",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1533750516398-6cf716e1e065?w=480&h=240&fit=crop",
+   ts:"มี.ค. 2569",
+   h:"Gucci เป็น Luxury House แรกที่ Launch 'Sponsored AI Lens' บน Snapchat — Generative AI สร้าง Interactive Campaign Narratives",
+   u:"https://www.trendhunter.com/slideshow/march-2026-social-media",
+   s:"TrendHunter / Snapchat",
+   sm:"Gucci ใช้ Generative AI Lens บน Snapchat ให้ผู้ใช้ immerse ใน interactive campaign narrative แบบ personalized เป็น luxury house แรกที่ launch format นี้ เป็นส่วนหนึ่งของ March 2026 social media trend ที่ AI-enhanced interactivity กำลังเป็น premium differentiator",
+   ins:"Luxury brand ใช้ AI Lens เพื่อสร้าง engagement ที่ exclusive ไม่ใช่ mass — สำหรับ AIA Prestige Club AI-powered personalized content อาจเป็น digital touchpoint ที่เหมาะกับ target ระดับ premium"},
+
+  {id:6,cat:"branding",cl:"BRANDING",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=480&h=240&fit=crop",
+   ts:"มี.ค. 2569",
+   h:"TikTok Trend: 'Intentional Consumer' — 81% ของ Users ใช้ TikTok Validate ก่อนซื้อ, 'Little Treat' Mindset กำลังจาง",
+   u:"https://newsroom.tiktok.com/introducing-tiktok-next-2026-our-trend-forecast-for-marketers-for-the-year-ahead",
+   s:"TikTok Newsroom",
+   sm:"TikTok ออก Forecast 2026 ธีม 'Irreplaceable Instinct' พบ 81% ของ users ใช้ TikTok เพื่อ validate การซื้อ impulse buying ลดลง ผู้บริโภคต้องการ 'WHY to Buy' มากกว่า 'what to buy' Brand Fusion, Identity Osmosis เป็น 2 behavioral patterns ใหม่",
+   ins:"FMCG ที่ยังทำ feature-heavy ads โดยไม่มี 'justification content' จะ underperform ใน 2570 — MinorFood/ThaiBev ควรทดสอบ creator-led validation content บน TikTok"},
+
+  {id:7,cat:"branding",cl:"BRANDING",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=480&h=240&fit=crop",
+   ts:"19 มี.ค. 2569",
+   h:"Programmatic War: Dentsu, WPP, Publicis พร้อมใจถอน The Trade Desk — หุ้น TTD ร่วง 33% YTD",
+   u:"https://www.campaignlive.com/article/tldr-trade-desk-fallout-dentsu-wpp-publicis/1952252",
+   s:"Campaign US",
+   sm:"Big 3 Holdcos ถอนตัวจาก TTD OpenPath ใน 1 เดือน: Dentsu+WPP ออกเพราะ fee transparency, Publicis audit พบ violations จริง CEO ของ TTD โต้ผ่าน op-ed อ้าง audit เป็นเรื่อง routine",
+   ins:"ลูกค้า C-level จะเริ่มตั้งคำถามเรื่อง programmatic fees กับ agency โดยตรง — Hakuhodo ควรเตรียม position statement เรื่อง transparent buying และ audit readiness ก่อนถูกถาม"},
+
+  // ── MEDIA ──
+  {id:8,cat:"media",cl:"MEDIA & TECH",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=480&h=240&fit=crop",
+   ts:"26 มี.ค. 2569",
+   h:"Shopify Agentic Storefronts: สินค้าขายได้ใน ChatGPT, Google AI Mode, Copilot โดยตรง — ไม่ต้อง App",
+   u:"https://www.theaimarketers.ai/news032626/",
+   s:"The AI Marketers",
+   sm:"Shopify เชื่อม product catalog โดยตรงกับ AI chatbots ชั้นนำ ราคา/inventory/checkout sync อัตโนมัติ ผู้ซื้อ complete transaction ใน AI conversation ได้เลยโดยไม่ต้องออกจาก interface แบรนด์ที่ไม่ใช้ Shopify ก็เข้าร่วมได้ผ่าน Agentic plan",
+   ins:"AI เริ่มกลายเป็น retail channel ใหม่ — Big C/MinorFood ที่มี e-commerce ต้องเริ่ม plan listing strategy บน AI storefronts ทันที ก่อนที่ competitor เข้าก่อน"},
+
+  {id:9,cat:"media",cl:"MEDIA & TECH",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=480&h=240&fit=crop",
+   ts:"26 มี.ค. 2569",
+   h:"YouTube Creator Partnerships: Gemini ค้น Creator 3M คน — Creator-led Shorts ให้ ROAS สูงกว่า Paid Social 86%",
+   u:"https://www.theaimarketers.ai/news032626/",
+   s:"The AI Marketers",
+   sm:"YouTube rebuild ระบบ BrandConnect ด้วย Gemini AI ค้นหา Creator จาก 3 ล้านคนได้แบบ contextual Creator-led Shorts ให้ Conversion +30% และ Long-term ROAS สูงกว่า Paid Social 86% ข้อมูล 79% ของ Gen Z บอก YouTube Creator ให้ความรู้สึก community ที่แท้จริง",
+   ins:"86% higher ROAS เป็น data point แข็งสำหรับ justify YouTube Creator budget ใน media plan — ใช้ argument นี้ใน ThaiBev/AIA next review ได้เลย"},
+
+  {id:10,cat:"media",cl:"MEDIA & TECH",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=480&h=240&fit=crop",
+   ts:"26 มี.ค. 2569",
+   h:"AirOps วิเคราะห์ 548K หน้า: GEO พบ 85% ของ Sources AI ดึงมาไม่ถูก Cite — Position #1 Google ได้ citation 3.5x มากกว่า",
+   u:"https://www.theaimarketers.ai/news032626/",
+   s:"The AI Marketers",
+   sm:"การศึกษา 548K หน้าจาก 15,000 prompts พบว่า 85% ของ sources ที่ AI ดึงมา process ไม่ได้ถูก cite ในคำตอบสุดท้าย Position #1 Google ได้รับ citation 3.5x มากกว่า position 20 Generative Engine Optimization (GEO) กลายเป็น discipline ใหม่ที่ brands ต้องลงทุน",
+   ins:"แบรนด์ที่ไม่ทำ authoritative content เพื่อ AI search จะ invisible ต่อผู้ใช้ AI tools รุ่นใหม่ — ใช้เป็น argument ใน digital strategy proposal กับ client ได้"},
+
+  // ── BUSINESS ──
+  {id:11,cat:"business",cl:"BUSINESS",fl:"🇹🇭",or:"thai",
+   img:"https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=480&h=240&fit=crop",
+   ts:"28 มี.ค. 2569",
+   h:"ตลท. เผย 75% บริษัทจดทะเบียนเป็นธุรกิจกงสี — มูลค่า ฿6.11 ล้านล้าน สู่ตลาดทุนเพื่อ professionalise",
+   u:"https://www.bangkokbiznews.com/",
+   s:"กรุงเทพธุรกิจ",
+   sm:"ตลท. เผยข้อมูล 75% ของบริษัทจดทะเบียนคือธุรกิจครอบครัว มูลค่ารวม ฿6.11 ล้านล้าน YLG, ศรีสวัสดิ์, ดั๊บเบิ้ล เอ เป็น case study ที่ใช้ตลาดทุนเป็นเครื่องมือ governance และดึงมืออาชีพเข้าบริหาร",
+   ins:"Context สำหรับ ThaiBev C-level deck — narrative 'กงสีไทยสู่สากล' เป็น brand story ที่ resonate กับนักลงทุนสถาบันระดับ regional"},
+
+  {id:12,cat:"business",cl:"BUSINESS",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=480&h=240&fit=crop",
+   ts:"19 มี.ค. 2569",
+   h:"ยุค Holding Company กำลังจบ — WPP ปรับเป็น 4 Divisions, Dentsu หาผู้ซื้อ International Business",
+   u:"https://www.marketingbrew.com/stories/2026/03/19/the-tide-has-turned-why-the-era-of-the-madison-avenue-holding-company-is-on-its-way-out",
+   s:"Marketing Brew",
+   sm:"WPP ประกาศยุติโมเดล Holding Company ปรับเป็น 4 divisions Dentsu หาผู้ซื้อ international business ส่วน Publicis ที่เป็น pioneer ของ single operating model ยัง grow 5.9% Q4 Tide เปลี่ยนใน Madison Avenue แน่นอนแล้ว",
+   ins:"ถ้า Dentsu Thailand เปลี่ยนมือ อาจมี pitch เปิดสำหรับลูกค้าบางรายของ Dentsu — Hakuhodo ควรเตรียม proactive outreach plan รับ strategic window นี้"},
+
+  // ── THAILAND ──
+  {id:13,cat:"thailand",cl:"THAILAND LOCAL",fl:"🇹🇭",or:"thai",
+   img:"https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=480&h=240&fit=crop",
+   ts:"28 มี.ค. 2569 · คืนนี้",
+   h:"Earth Hour 2026 คืนนี้ 20:30-21:30 น. ทั่ว กทม. — กฟน. นำร่อง กทม.+นนทบุรี+สมุทรปราการ",
+   u:"https://www.nationthailand.com/news/general/40064117",
+   s:"The Nation Thailand",
+   sm:"รัฐบาลไทยเชิญร่วม Earth Hour 2026 คืนนี้ ดับไฟทั่วกรุงเทพฯ 1 ชั่วโมง กฟน. เป็น partner หลัก กิจกรรมระดับ global มีผู้เข้าร่วมกว่า 2.2 ล้านคนในครั้งแรก ลดพลังงานเทียบเท่าถอนรถ 48,000 คันจากถนน",
+   ins:"Real-time opportunity คืนนี้เอง — ThaiBev และ AIA มี ESG commitment ที่สามารถ activate social ได้ real-time เพื่อ organic reach โดยไม่ต้องใช้งบ paid media"},
+
+  {id:14,cat:"thailand",cl:"THAILAND LOCAL",fl:"🇹🇭",or:"thai",
+   img:"https://images.unsplash.com/photo-1598128558393-70ff21433be0?w=480&h=240&fit=crop",
+   ts:"28 มี.ค. 2569",
+   h:"Wisesight: วิกฤตน้ำมัน 2569 สร้าง Social Engagement 103 ล้านครั้ง — TikTok ขยายกระแสเร็วสุด",
+   u:"https://www.bangkokbiznews.com/",
+   s:"กรุงเทพธุรกิจ",
+   sm:"การพูดถึงวิกฤตน้ำมันบนโซเชียลไทยสร้าง engagement 103 ล้านครั้ง TikTok เป็นแพลตฟอร์มที่ขยายกระแสเร็วที่สุด โดยเฉพาะเนื้อหาเรื่องราคาดีเซลและผลกระทบชีวิตประจำวัน ข้อมูลจาก Wisesight Social Analytics",
+   ins:"103 ล้าน engagements สะท้อนว่า economic content ไปถึง mass consumer จริง — แบรนด์ที่ communicate empathy ในช่วงนี้สร้าง brand equity ได้เร็วกว่าการทำ paid awareness"},
+
+  {id:15,cat:"thailand",cl:"THAILAND LOCAL",fl:"🇹🇭",or:"thai",
+   img:"https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=480&h=240&fit=crop",
+   ts:"28 มี.ค. 2569",
+   h:"หุ้นไทยท่ามกลางวิกฤตอิหร่าน: HANA +47%, ทองคำแตะ $4,558 — Goldman คาด $5,400 ปลายปี",
+   u:"https://www.cnbc.com/2026/03/25/gold-prices-oil-us-iran-talks-goldman-forecast-trimp-middle-east-inflation.html",
+   s:"CNBC / กรุงเทพธุรกิจ",
+   sm:"ท่ามกลางวิกฤตอิหร่าน กลุ่มหุ้นเทคไทยยัง perform ดี HANA นำทีม +47% ขณะ Spot Gold แตะ $4,558/oz หลัง Trump ระบุอิหร่านกำลังเจรจา Goldman คง bullish forecast $5,400 ปลายปี 2569",
+   ins:"สัญญาณ de-escalation ลด risk premium — ปัจจัยบวกต่อ consumer confidence และ campaign planning Q3/Q4 โดยเฉพาะสำหรับ AIA ที่ target กลุ่ม financial security"},
+
+  // ── ECONOMICS ──
+  {id:16,cat:"economics",cl:"ECONOMICS",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=480&h=240&fit=crop",
+   ts:"มี.ค. 2569",
+   h:"Global GDP ปี 2569 ถูกปรับลดเหลือ 2.9% — Brent คาดเฉลี่ย $90 ก่อนลงสู่ $60 ปลายปี",
+   u:"https://imeneconomics.substack.com/p/global-economy-flash-march-2026",
+   s:"IMEN Economics",
+   sm:"รายงาน Global Economy Flash ปรับ GDP โลกลงเหลือ 2.9% วิกฤตตะวันออกกลางกระทบ supply chain น้ำมัน ปุ๋ย เงินเฟ้อถูกปรับขึ้น 0.3-0.5% ทั่วโลก Brent คาดเฉลี่ย $95 สิ้น มิ.ย. ก่อนชะลอ",
+   ins:"GDP ไทย 2569 คาดชะลอที่ 1.6% — สัญญาณที่ AIA ควรพิจารณาใน target กลุ่ม middle-income ที่ต้องการ financial security มากขึ้นในช่วงเศรษฐกิจหดตัว"},
+
+  {id:17,cat:"economics",cl:"ECONOMICS",fl:"🇹🇭",or:"thai",
+   img:"https://images.unsplash.com/photo-1542338347-4fff3276af78?w=480&h=240&fit=crop",
+   ts:"28 มี.ค. 2569",
+   h:"สสอ. เตือนหากน้ำมันแตะ $150 GDP อุตสาหกรรมไทยหด ฿12,000 ล้าน — ปิโตรเคมี, ยานยนต์, Logistics หนักสุด",
+   u:"https://www.bangkokbiznews.com/",
+   s:"กรุงเทพธุรกิจ",
+   sm:"สำนักงานเศรษฐกิจอุตสาหกรรมประเมินว่าหากน้ำมันถึง $100 กระทบ GDP อุตสาหกรรม ฿10,000-12,000 ล้านบาท กลุ่มที่ได้รับผลหนักสุดคือปิโตรเคมี ยานยนต์ และ logistics",
+   ins:"FMCG supply chain ของ ThaiBev/MinorFood จะได้รับผลกระทบทางอ้อมจากค่าขนส่ง — ควรเตรียม contingency messaging plan สำหรับ consumer communication ในกรณีราคาสินค้าขยับ"},
+
+  {id:18,cat:"economics",cl:"ECONOMICS",fl:"🇹🇭",or:"thai",
+   img:"https://images.unsplash.com/photo-1610375461246-83df859d849d?w=480&h=240&fit=crop",
+   ts:"25 มี.ค. 2569",
+   h:"ตลาดโฆษณาไทยปี 2569 โต 1.7% แตะ ฿87.3B — OOH ฟื้นตัว, แบรนด์ Rebalance กลับสู่ Brand Building",
+   u:"https://heythailandnews.com/posts/thailands-ad-spending-shift-why-billboards-and-tv-beat-digital-clicks-in-2026",
+   s:"Hey Thailand News",
+   sm:"ตลาดโฆษณาไทยขยายตัว 1.7% แตะ ฿87.3B (อาจสูงถึง ฿111.6B รวม SME+influencer) แบรนด์ขนาดใหญ่ rebalance กลับสู่ brand building OOH ฟื้นตัวชัดเจน Digital ยังครอง 45% แต่ performance curve เริ่มราบ",
+   ins:"Data point ที่ justify OOH strategy ของ AIA Privilege ได้ตรงๆ — OOH ไม่ใช่ legacy media แต่เป็น strategic rebalancing ที่ทั้งตลาดกำลังทำ"},
+
+  // ── GADGETS & MOBILE ──
+  {id:19,cat:"gadgets",cl:"GADGETS & TECH",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=480&h=240&fit=crop",
+   ts:"2-5 มี.ค. 2569 · MWC Barcelona",
+   h:"MWC 2026 Highlights: Honor Robot Phone, Samsung Galaxy S26, Xiaomi 17 Ultra — Foldables + AI กลายเป็น 'New Normal'",
+   u:"https://www.t3.com/live/news/mwc-2026",
+   s:"T3 / Gizmochina",
+   sm:"Mobile World Congress 2026 เต็มไปด้วย flagship launches: Samsung Galaxy S26 series ship แล้ว, Xiaomi 17 Ultra ใช้ Snapdragon 8 Elite Gen 5 + Leica camera, Honor Robot Phone มีหุ่นยนต์ gimbal ซ่อนในตัวกางออกเพื่อ AI tracking อัตโนมัติ Qualcomm เปิดบทสนทนา 6G ในฐานะ 'AI-native network' สำหรับอนาคต",
+   ins:"MWC 2026 ชัดเจนว่า AI ไม่ใช่ feature เพิ่มเติมอีกต่อไป — ถูก bake in ทุก device ตั้งแต่ camera จนถึง network layer แบรนด์ไทยต้องเริ่ม plan AI-native consumer touchpoint"},
+
+  {id:20,cat:"gadgets",cl:"GADGETS & TECH",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1567581935884-3349723552ca?w=480&h=240&fit=crop",
+   ts:"4 มี.ค. 2569",
+   h:"iPhone 17e เปิดตัวแล้ว: A19 Chip + Apple Intelligence ราคาเป็นมิตร — AI Features ถึงมือ Mass Market",
+   u:"https://www.macworld.com/article/1484151/apple-spring-event-date-time-how-to-watch-rumors.html",
+   s:"Macworld / Croma Unboxed",
+   sm:"Apple เปิดตัว iPhone 17e (4 มี.ค.) ด้วย A19 chip เดียวกับ iPhone 17 บวก Dynamic Island และ Apple Intelligence เต็มรูปแบบ ในราคาต่ำกว่า flagship รองรับ MagSafe 15W และ C1X modem ใหม่ รวมถึง iPad Air M4 (11/13 นิ้ว, 12GB RAM) ในงานเดียวกัน",
+   ins:"iPhone 17e ราคาต่ำกว่า = AI features เข้าถึง mass Thai consumer ได้จริง — consumer expectation ต่อ brand digital experience จะยกระดับทุก segment ใน H2/2569"},
+
+  {id:21,cat:"gadgets",cl:"GADGETS & TECH",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=480&h=240&fit=crop",
+   ts:"5 มี.ค. 2569",
+   h:"Nothing Phone (4a) เปิดตัว: Glyph Bar ใหม่, Snapdragon 7s Gen 4 — Mid-Range ที่ Design มาแรง กวาด Gen Z",
+   u:"https://nokiamob.net/2026/02/26/top-5-highly-anticipated-smartphone-launches-slated-for-march-2026/",
+   s:"NPowerUser / T3",
+   sm:"Nothing Phone (4a) เปิดตัว (5 มี.ค.) ด้วย 6.78-inch 120Hz AMOLED, Snapdragon 7s Gen 4, Glyph Bar interface ใหม่ ราคา ~€349 ขณะที่ Realme Narzo Power เปิดตัวแบตเตอรี่ 10,001mAh ในวันเดียวกัน สะท้อน trend mid-range ที่แข่งด้วย spec ไม่ใช่แค่ราคา",
+   ins:"Nothing Phone ดึง Gen Z ด้วย design identity ที่ชัดเจน ไม่ใช่ spec sheet — lesson สำหรับ FMCG: brand visual identity ที่ strong กว่าคู่แข่งยังสร้าง premium perception ได้แม้ราคา mid-range"},
+
+  {id:22,cat:"gadgets",cl:"GADGETS & TECH",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1523395243481-163f8f6155ab?w=480&h=240&fit=crop",
+   ts:"มี.ค. 2569",
+   h:"Google Android XR Glasses 2026: Monocular MicroLED + Gemini AI — AR แบบ Wearable เริ่มจริงจังแล้ว",
+   u:"https://www.phonearena.com/news/five-mobile-tech-announcements-2026_id176964",
+   s:"PhoneArena",
+   sm:"Google ยืนยันกลับสู่ AR ambitions ด้วย Android XR Glasses ใช้ monocular microLED display ฝังในเลนส์ ใช้ Gemini เป็น always-on assistant แสดง floating UI สำหรับ music, navigation, video calls, image generation Samsung Galaxy Z TriFold ขยาย rollout สหรัฐ — จอ 10 นิ้ว รัน 3 apps พร้อมกัน",
+   ins:"AR Glasses + Foldables กำลัง redefine screen real estate — ใน 3-5 ปี brand content strategy จะต้องรองรับ ambient/spatial format ที่ไม่ใช่ rectangle screen อีกต่อไป"},
+
+  // ── AI USE CASES ──
+  {id:32,cat:"ai",cl:"AI USE CASES",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=480&h=240&fit=crop",
+   ts:"23-24 มี.ค. 2569",
+   h:"🤖 Claude Use Case: Claude Computer Use เปิดตัว — สั่งงานจากโทรศัพท์ แล้ว Claude ทำงานบนคอมฯ ให้เสร็จ",
+   u:"https://www.cnbc.com/2026/03/24/anthropic-claude-ai-agent-use-computer-finish-tasks.html",
+   s:"CNBC / Engadget",
+   sm:"Anthropic เปิดตัว Computer Use สำหรับ Claude Pro/Max บน macOS (research preview) ผู้ใช้ส่ง task จากมือถือผ่าน Dispatch → Claude เปิด apps, navigate browser, fill spreadsheets บนคอมฯ ทำงานให้จนเสร็จ use case demo: 'export pitch deck เป็น PDF และแนบใน meeting invite ให้หน่อย'",
+   ins:"Use case ตรงสำหรับ VB: ใช้ Dispatch บน iPhone ส่ง task เช้าตรู่ให้ Claude ดึงข่าว+สรุป+เตรียม brief ไว้ก่อนถึงออฟฟิศ — เริ่มทดสอบได้เลยถ้าใช้ Claude Pro/Max"},
+
+  {id:33,cat:"ai",cl:"AI USE CASES",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1668519904072-24f73e0c6a94?w=480&h=240&fit=crop",
+   ts:"24 มี.ค. 2569",
+   h:"🤖 Claude Use Case: Claude Code 'Auto Mode' — AI ตัดสินใจเองว่า action ไหนปลอดภัยไม่ต้องถาม, มี AI Safety Layer กรอง",
+   u:"https://techcrunch.com/2026/03/24/anthropic-hands-claude-code-more-control-but-keeps-it-on-a-leash/",
+   s:"TechCrunch",
+   sm:"Anthropic เปิดตัว Auto Mode สำหรับ Claude Code (research preview) ให้ AI ตัดสินใจว่า action ไหน safe พอที่จะทำเองโดยไม่ต้องขออนุญาต มี AI Safety Layer ตรวจสอบทุก action ก่อน run ลด 'babysitting' ที่ developer ต้องทำใน agentic workflow",
+   ins:"สำหรับ agency workflow: Claude Code Auto Mode ช่วย automate งาน report generation, data analysis, presentation draft ได้โดยไม่ต้อง approve ทีละ step — ทีม Hakuhodo ที่ใช้อยู่ควรอัปเกรดทดสอบ"},
+
+  {id:23,cat:"ai",cl:"AI USE CASES",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1555255707-c07966088b7b?w=480&h=240&fit=crop",
+   ts:"มี.ค. 2569",
+   h:"🤖 Claude Use Case: Claude + Excel/PowerPoint Add-ins แชร์ Context ข้ามกัน — ทำ Data ใน Excel แล้ว Claude สร้าง Slides ใน PPT ได้เลย",
+   u:"https://releasebot.io/updates/anthropic/claude",
+   s:"Anthropic Release Notes",
+   sm:"Claude อัปเดต Excel และ PowerPoint add-ins ให้ share full conversation context ข้ามกัน: วิเคราะห์ข้อมูลใน Excel แล้ว Claude จะสร้าง PPT slides จาก context เดิมได้เลยโดยไม่ต้อง re-explain รองรับ Amazon Bedrock, Google Vertex AI, Microsoft Foundry",
+   ins:"Use case ตรงสำหรับ VB: ใช้ Claude วิเคราะห์ YouGov data ใน Excel แล้ว generate C-level deck slides บน PPT ได้ใน workflow เดียว — ลดเวลาทำ ThaiBev/AIA deck ได้มาก"},
+
+  {id:24,cat:"ai",cl:"AI USE CASES",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=480&h=240&fit=crop",
+   ts:"มี.ค. 2569",
+   h:"Claude Code /loop Command: ตั้ง Scheduled Task อัตโนมัติ — 'Check deploy ทุก 5 นาที' หรือ 'PR Review อัตโนมัติ' โดยไม่ต้องนั่งดู",
+   u:"https://pasqualepillitteri.it/en/news/381/claude-code-march-2026-updates",
+   s:"Claude Code March 2026 Updates",
+   sm:"Claude Code v2.1.71 เพิ่ม /loop command ให้ตั้ง recurring scheduled task ได้แบบ cron job: /loop 5m 'check deploy status' → Claude ทำซ้ำทุก 5 นาที version ล่าสุด v2.1.76 เพิ่ม /effort command, voice mode (push-to-talk), MCP elicitation support",
+   ins:"Use case ไม่ใช่แค่สำหรับ developer — media agency สามารถใช้ /loop ตั้ง Claude ให้ monitor ข่าว, ดึงข้อมูล SET, หรือ check campaign performance dashboard ทุกชั่วโมงโดยอัตโนมัติ"},
+
+  // ── SOCIAL / VIRAL ──
+  {id:25,cat:"social",cl:"SOCIAL & VIRAL",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1611605698335-8b1569810432?w=480&h=240&fit=crop",
+   ts:"6 มี.ค. 2569",
+   h:"🎬 Harry Styles 'Kiss All the Time. Disco, Occasionally.' — 11 Trending Audios ใน 1 Album, ครอง GRWM + Day-in-Life FYP ทั่วโลก",
+   u:"https://newengen.com/insights/march-2026-tiktok-trends/",
+   s:"New Engen / TikTok",
+   sm:"Harry Styles ปล่อยอัลบั้มใหม่ 6 มี.ค. สร้าง trending audio 11 เพลงพร้อมกัน 'Aperture' ครอง GRWM content ทั่วโลก ขณะที่ Megan Moroney's 'Cloud 9' ครอง breakup content ยาวมาถึง มี.ค. กลุ่มนี้ drive TikTok engagement สูงสุดในรอบปี",
+   ins:"Creator culture ใน 2569 ขับเคลื่อนโดย audio ไม่ใช่ visual — แบรนด์ที่ partner กับ Harry Styles sound หรือ trending audio ล่วงหน้าจะได้ organic reach โดยไม่ต้องซื้อ media"},
+
+  {id:26,cat:"social",cl:"SOCIAL & VIRAL",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1512314889357-e157c22f938d?w=480&h=240&fit=crop",
+   ts:"มี.ค. 2569",
+   h:"🎬 Viral: Pokémon 30th Anniversary — 1,000+ Unique Logos ทำให้ Fan Create Content Nostalgia ระเบิดทั่วโลก",
+   u:"https://blog.mean.ceo/viral-trends-on-social-media-march-2026/",
+   s:"Mean CEO Blog / TrendHunter",
+   sm:"Pokémon ครบ 30 ปี ออก unique logo สำหรับ Pokémon 1,000+ ตัว Fan content ระเบิดทั่ว TikTok/Instagram แบรนด์หลายรายกระโดดเข้าร่วม nostalgia wave นี้ กลายเป็น model ของ 'coordinated micro-movement สร้าง global wave' ที่ brands เรียนรู้ได้",
+   ins:"Nostalgia + Exclusivity เป็น formula ที่ work ในปี 2569 — ThaiBev/MinorFood ที่มีแบรนด์อายุ 20+ ปี มีสินทรัพย์ nostalgic ที่ยังไม่ถูก activate อย่างเต็มที่"},
+
+  {id:27,cat:"social",cl:"SOCIAL & VIRAL",fl:"🇹🇭",or:"thai",
+   img:"https://images.unsplash.com/photo-1534612899740-55c821a90bee?w=480&h=240&fit=crop",
+   ts:"26 มี.ค. 2569",
+   h:"🎬 Viral ไทย: Miss Grand Thailand 2026 ฟันปลอมหลุดบนเวที — สู้ต่อไม่หยุด กวาดยอดแชร์ TikTok ระเบิด",
+   u:"https://en.cibercuba.com/noticias/2026-03-26-u198484-e198484-s27065-nid324125-viral-concursante-miss-grand-thailand-le-cae",
+   s:"CiberCuba / TikTok Thailand",
+   sm:"Kamolwan Chanago ผู้แทนจากปทุมธานี ใน Miss Grand Thailand 2026 เผชิญกับฟันปลอมหลุดระหว่าง presentation แต่ทำต่อได้อย่างมั่นใจ โดยไม่หยุดหรือเสียฟอร์ม กวาดยอด like และ share บน TikTok ไทยระเบิด กลายเป็น symbol ของความกล้า",
+   ins:"'Grace Under Pressure' content กำลัง resonate มาก บน TikTok ไทยในปี 2569 — brands ที่ communicate authenticity และ resilience จะ connect กับ Thai consumer ได้ลึกกว่า polished perfection"},
+
+  // ── AGENCY ──
+  {id:28,cat:"agency",cl:"AGENCY MOVES",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1497366216548-37526070297c?w=480&h=240&fit=crop",
+   ts:"มี.ค. 2569",
+   h:"Ogilvy Singapore คว้า Asia Creative Agency of the Year 2025 — กระโดดจาก #17 สู่ #1 ใน 1 ปี",
+   u:"https://campaignbriefasia.com/",
+   s:"Campaign Brief Asia",
+   sm:"Campaign Brief Asia ประกาศ Ogilvy Singapore เป็น Creative Agency of the Year 2025 กระโดดจาก #17 ขึ้นมา #1 ใน 1 ปี Dentsu Inc rank #2, TBWA Hakuhodo Tokyo #3, Ogilvy India #4 การกระโดดขึ้น rank อย่างรวดเร็วมาจาก creative output ที่ consistent + award wins",
+   ins:"TBWA Hakuhodo ติด top 3 สะท้อนว่า Hakuhodo network มี global creative credential — ใช้เป็น proof point ใน new biz pitch ว่า Hakuhodo Bangkok เป็นส่วนหนึ่งของ top-tier network"},
+
+  {id:29,cat:"agency",cl:"AGENCY MOVES",fl:"🌐",or:"intl",
+   img:"https://images.unsplash.com/photo-1552664730-d307ca884978?w=480&h=240&fit=crop",
+   ts:"มี.ค. 2569",
+   h:"Dyson รวม $500M Global Media Account ให้ Agency เดียว — WPP, Publicis, Omnicom เข้าชิงรอบสุดท้าย",
+   u:"https://www.campaignlive.com/news/agency-news",
+   s:"Campaign Live",
+   sm:"Dyson รวม global media planning+buying account มูลค่า $500M ให้ agency เดียว WPP, Publicis และ Omnicom เข้ารอบสุดท้าย เป็น trend consolidation ที่ brands ต้องการ one integrated partner ครอบคลุม strategy ถึง buying",
+   ins:"Trend 'ย้าย account ให้ agency เดียว' กำลังเร่งตัว — agency ที่พิสูจน์ full-service capability ได้จะได้ mandate ใหญ่ขึ้น ใช้เป็น argument ใน pitch ที่ Hakuhodo มี integrated offering"}
+];
+
+// ── STATE ──
+var savedMap={};var pinnedMap={};var curFilter='all';var curSearch='';
+var CAT_CLR={marketing:'var(--cat-marketing)',media:'var(--cat-media)',business:'var(--cat-business)',thailand:'var(--cat-thailand)',branding:'var(--cat-branding)',economics:'var(--cat-economics)',gadgets:'var(--cat-gadgets)',ai:'var(--cat-ai)',social:'var(--cat-social)',agency:'var(--cat-agency)'};
+var FLABELS={all:'All Articles',marketing:'Marketing & Campaigns',media:'Media & Tech',business:'Business',thailand:'Thailand Local',branding:'Branding & Consumer',economics:'Economics',gadgets:'Gadgets & Tech',ai:'AI Use Cases',social:'Social & Viral',agency:'Agency Moves',saved:'Saved Articles',pinned:'Pinned Articles'};
+var FB='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=480&h=240&fit=crop';
+
+function cc(cat){return CAT_CLR[cat]||'#888';}
+
+// THEME
+function setTheme(t){
+  document.body.className='theme-'+t;
+  document.getElementById('btn-dark').className='tbtn'+(t==='dark'?' on':'');
+  document.getElementById('btn-white').className='tbtn'+(t==='white'?' on':'');
+}
+
+// CLOCK
+function updateClock(){
+  var now=new Date();
+  var h=now.getHours().toString().padStart(2,'0');
+  var m=now.getMinutes().toString().padStart(2,'0');
+  var s=now.getSeconds().toString().padStart(2,'0');
+  var el=document.getElementById('clock');
+  if(el) el.textContent=h+':'+m+':'+s;
+}
+updateClock();
+setInterval(updateClock,1000);
+
+// FILTER
+function getFilt(){
+  var a=DATA.slice();
+  if(curFilter==='saved') a=a.filter(function(x){return savedMap[x.id];});
+  else if(curFilter==='pinned') a=a.filter(function(x){return pinnedMap[x.id];});
+  else if(curFilter!=='all') a=a.filter(function(x){return x.cat===curFilter;});
+  if(curSearch){var q=curSearch.toLowerCase();a=a.filter(function(x){return(x.h+x.sm+x.ins+x.cl).toLowerCase().indexOf(q)!==-1;});}
+  return a;
+}
+
+// RENDER
+function render(){
+  var a=getFilt();
+  document.getElementById('vcnt').textContent=a.length;
+  var cont=document.getElementById('articles');
+  var emp=document.getElementById('empty');
+  if(!a.length){cont.innerHTML='';emp.style.display='block';return;}
+  emp.style.display='none';
+  var html='';
+  if(curFilter==='all'&&!curSearch){
+    var th=a.filter(function(x){return x.or==='thai';});
+    var gl=a.filter(function(x){return x.or==='intl';});
+    if(th.length){html+='<div class="sdiv"><div class="sbadge th">🇹🇭 ข่าวในประเทศ</div></div><div class="cgrid">';for(var i=0;i<th.length;i++)html+=crd(th[i]);html+='</div>';}
+    if(gl.length){html+='<div class="sdiv"><div class="sbadge gl">🌐 ข่าวต่างประเทศ</div></div><div class="cgrid">';for(var j=0;j<gl.length;j++)html+=crd(gl[j]);html+='</div>';}
+  }else{
+    html='<div class="cgrid">';for(var k=0;k<a.length;k++)html+=crd(a[k]);html+='</div>';
+  }
+  cont.innerHTML=html;
+}
+
+function crd(a){
+  var sv=!!savedMap[a.id],pn=!!pinnedMap[a.id],col=cc(a.cat);
+  return '<div class="card'+(sv?' sv':'')+(pn?' pn':'')+'" data-id="'+a.id+'">'+
+    '<div class="ctopbar" style="background:'+col+'"></div>'+
+    '<div class="cimgwrap">'+
+      '<img src="'+a.img+'" alt="" loading="lazy" onerror="this.src=\''+FB+'\'">'+
+      '<div class="ccat"><span class="ccl" style="color:'+col+'">'+a.cl+'</span><span class="ccf">'+a.fl+'</span></div>'+
+      '<div class="pinbadge">📌</div>'+
+    '</div>'+
+    '<div class="cinner">'+
+      '<div class="cmeta">'+
+        '<div class="csrc-wrap">'+
+          '<div class="csrc">'+a.s+'</div>'+
+          '<div class="cts">🕐 '+a.ts+'</div>'+
+        '</div>'+
+        '<div class="cacts">'+
+          '<button class="cabt'+(sv?' sv':'')+'" onclick="tSave(event,'+a.id+')">⭐</button>'+
+          '<button class="cabt'+(pn?' pn':'')+'" onclick="tPin(event,'+a.id+')">📌</button>'+
+        '</div>'+
+      '</div>'+
+      '<div class="chead"><a href="'+a.u+'" target="_blank" onclick="event.stopPropagation()">'+a.h+'</a></div>'+
+      '<div class="csum">'+a.sm+'</div>'+
+      '<div class="cins"><span class="ilabel">🎯 Insight:</span>'+a.ins+'</div>'+
+    '</div></div>';
+}
+
+// SAVE / PIN
+function tSave(e,id){e.stopPropagation();if(savedMap[id]){delete savedMap[id];toast('ลบออกจาก Saved');}else{savedMap[id]=1;toast('⭐ บันทึกแล้ว');}updCnt();render();}
+function tPin(e,id){e.stopPropagation();if(pinnedMap[id]){delete pinnedMap[id];toast('ถอด Pin แล้ว');}else{pinnedMap[id]=1;toast('📌 Pin แล้ว');}updCnt();render();}
+function updCnt(){var sv=Object.keys(savedMap).length,pn=Object.keys(pinnedMap).length;document.getElementById('c-all').textContent=DATA.length;document.getElementById('c-saved').textContent=sv;document.getElementById('c-pinned').textContent=pn;}
+
+// FILTER HANDLER
+function setF(f){
+  curFilter=f;curSearch='';
+  document.getElementById('search').value='';
+  document.getElementById('mtitle').textContent=FLABELS[f]||f;
+  var all=document.querySelectorAll('[data-f]');
+  for(var i=0;i<all.length;i++) all[i].classList.toggle('on',all[i].getAttribute('data-f')===f);
+  render();
+}
+
+// TOAST
+var tt;
+function toast(m){var el=document.getElementById('toast');el.textContent=m;el.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){el.classList.remove('show');},2000);}
+
+// INIT
+(function(){
+  var els=document.querySelectorAll('[data-f]');
+  for(var i=0;i<els.length;i++){(function(el){el.addEventListener('click',function(){setF(el.getAttribute('data-f'));});})(els[i]);}
+  document.getElementById('search').addEventListener('input',function(e){curSearch=e.target.value;render();});
+  document.getElementById('tpanel-toggle').addEventListener('click',function(){document.getElementById('tbody2').classList.toggle('op');document.getElementById('tarr').classList.toggle('op');});
+  render();
+})();
+</script>
+<!-- ══ IMPORT RSS MODAL ══ -->
+<div class="modal-overlay" id="modal-import">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">⬇ IMPORT RSS FEED</div>
+      <button class="modal-close" onclick="closeModal('modal-import')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-label">RSS Feed URL</div>
+      <input class="modal-input" id="rss-url" type="url" placeholder="https://marketingoops.com/feed/" autocomplete="off">
+      <div class="modal-hint">
+        ตัวอย่าง RSS ที่แนะนำ:<br>
+        <code>https://marketingoops.com/feed/</code><br>
+        <code>https://www.campaignasia.com/rss/news</code><br>
+        <code>https://adage.com/rss.xml</code><br>
+        <code>https://www.bangkokpost.com/rss/data/business.xml</code>
+      </div>
+      <div class="modal-label">จำนวน articles ที่ต้องการ</div>
+      <input class="modal-input" id="rss-limit" type="number" value="5" min="1" max="10" style="width:100px;margin-bottom:14px;">
+      <div class="mstatus" id="rss-status"></div>
+      <div class="rss-list" id="rss-list"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="mbtn cancel" onclick="closeModal('modal-import')">ยกเลิก</button>
+      <button class="mbtn go" id="rss-fetch-btn" onclick="fetchRSS()">⬇ Fetch Feed</button>
+      <button class="mbtn go" id="rss-import-btn" onclick="importSelected()" style="display:none">✅ เพิ่มเข้า Portal</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ADD URL MODAL ══ -->
+<div class="modal-overlay" id="modal-add">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">+ ADD ARTICLE URL</div>
+      <button class="modal-close" onclick="closeModal('modal-add')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-label">Article URL</div>
+      <input class="modal-input" id="add-url" type="url" placeholder="https://www.campaignasia.com/article/..." autocomplete="off">
+      <div class="modal-hint">วาง URL บทความที่ต้องการ — Claude จะอ่าน เขียนสรุป และจัดหมวดหมู่ให้อัตโนมัติ</div>
+      <div class="mstatus" id="add-status"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="mbtn cancel" onclick="closeModal('modal-add')">ยกเลิก</button>
+      <button class="mbtn go" id="add-btn" onclick="addArticle()">🤖 ให้ Claude สรุป</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══ MODAL HELPERS ══
+function openImport(){
+  document.getElementById('rss-url').value='';
+  setStatus('rss-status','','');
+  document.getElementById('rss-list').innerHTML='';
+  document.getElementById('rss-list').classList.remove('show');
+  document.getElementById('rss-import-btn').style.display='none';
+  document.getElementById('rss-fetch-btn').style.display='';
+  document.getElementById('modal-import').classList.add('show');
+  setTimeout(function(){document.getElementById('rss-url').focus();},100);
+}
+function openAdd(){
+  document.getElementById('add-url').value='';
+  setStatus('add-status','','');
+  document.getElementById('add-btn').disabled=false;
+  document.getElementById('modal-add').classList.add('show');
+  setTimeout(function(){document.getElementById('add-url').focus();},100);
+}
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+
+// Close on overlay click
+document.getElementById('modal-import').addEventListener('click',function(e){if(e.target===this)closeModal('modal-import');});
+document.getElementById('modal-add').addEventListener('click',function(e){if(e.target===this)closeModal('modal-add');});
+
+function setStatus(id,msg,type){
+  var el=document.getElementById(id);
+  el.innerHTML=msg;
+  el.className='mstatus'+(msg?' show':'')+(type?' '+type:'');
+}
+
+// ══ CLAUDE API CALL ══
+async function callClaude(prompt){
+  var res=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens:1000,
+      messages:[{role:'user',content:prompt}]
+    })
+  });
+  var data=await res.json();
+  if(!res.ok) throw new Error(data.error&&data.error.message||'API error');
+  var text='';
+  for(var i=0;i<data.content.length;i++){if(data.content[i].type==='text')text+=data.content[i].text;}
+  return text;
+}
+
+// ══ CORS PROXY for RSS ══
+function proxyUrl(url){
+  return 'https://api.allorigins.win/get?url='+encodeURIComponent(url);
+}
+
+// ══ FETCH RSS ══
+var rssFeedItems=[];
+var rssSelected={};
+
+async function fetchRSS(){
+  var url=document.getElementById('rss-url').value.trim();
+  if(!url){setStatus('rss-status','⚠️ กรุณาใส่ RSS URL ก่อน','err');return;}
+  var limit=parseInt(document.getElementById('rss-limit').value)||5;
+  var btn=document.getElementById('rss-fetch-btn');
+  btn.disabled=true;
+  setStatus('rss-status','<span class="spin"></span>กำลัง fetch RSS feed...','');
+  document.getElementById('rss-list').classList.remove('show');
+  rssSelected={};
+
+  try{
+    var r=await fetch(proxyUrl(url));
+    var d=await r.json();
+    var xml=new DOMParser().parseFromString(d.contents,'text/xml');
+    var items=xml.querySelectorAll('item');
+    if(!items.length) throw new Error('ไม่พบ items ใน feed นี้ (อาจไม่ใช่ RSS format)');
+
+    rssFeedItems=[];
+    var count=Math.min(items.length,limit);
+    for(var i=0;i<count;i++){
+      var it=items[i];
+      var title=(it.querySelector('title')||{}).textContent||'No title';
+      var link=(it.querySelector('link')||{}).textContent||(it.querySelector('guid')||{}).textContent||'';
+      var pubDate=(it.querySelector('pubDate')||{}).textContent||'';
+      var desc=(it.querySelector('description')||{}).textContent||'';
+      // strip HTML tags from desc
+      var tmp=document.createElement('div');tmp.innerHTML=desc;
+      var plain=tmp.textContent||tmp.innerText||'';
+      rssFeedItems.push({title:title.trim(),link:link.trim(),pubDate:pubDate.trim(),desc:plain.trim().slice(0,300)});
+    }
+
+    setStatus('rss-status','✅ พบ '+rssFeedItems.length+' articles — เลือกที่ต้องการนำเข้า','ok');
+    renderRSSList();
+  }catch(e){
+    setStatus('rss-status','❌ '+e.message,'err');
+  }finally{
+    btn.disabled=false;
+  }
+}
+
+function renderRSSList(){
+  var list=document.getElementById('rss-list');
+  list.innerHTML='';
+  for(var i=0;i<rssFeedItems.length;i++){
+    (function(idx,item){
+      var div=document.createElement('div');
+      div.className='rss-item'+(rssSelected[idx]?' sel':'');
+      div.innerHTML='<div class="rss-chk">'+(rssSelected[idx]?'✓':'')+'</div>'+
+        '<div class="rss-info">'+
+          '<div class="rss-ttl">'+item.title+'</div>'+
+          '<div class="rss-src">'+item.pubDate+'</div>'+
+        '</div>';
+      div.addEventListener('click',function(){
+        rssSelected[idx]=!rssSelected[idx];
+        renderRSSList();
+        var sel=Object.keys(rssSelected).filter(function(k){return rssSelected[k];}).length;
+        document.getElementById('rss-import-btn').style.display=sel?'':'none';
+      });
+      list.appendChild(div);
+    })(i,rssFeedItems[i]);
+  }
+  list.classList.add('show');
+  // Select all by default
+  for(var j=0;j<rssFeedItems.length;j++) rssSelected[j]=true;
+  renderRSSListSelected();
+}
+
+function renderRSSListSelected(){
+  var items=document.getElementById('rss-list').querySelectorAll('.rss-item');
+  for(var i=0;i<items.length;i++){
+    items[i].className='rss-item'+(rssSelected[i]?' sel':'');
+    items[i].querySelector('.rss-chk').textContent=rssSelected[i]?'✓':'';
+  }
+  var sel=Object.keys(rssSelected).filter(function(k){return rssSelected[k];}).length;
+  document.getElementById('rss-import-btn').style.display=sel?'':'none';
+}
+
+async function importSelected(){
+  var selIdxs=Object.keys(rssSelected).filter(function(k){return rssSelected[k];}).map(Number);
+  if(!selIdxs.length){setStatus('rss-status','⚠️ เลือก article ก่อนนะ','err');return;}
+
+  var btn=document.getElementById('rss-import-btn');
+  btn.disabled=true;
+  setStatus('rss-status','<span class="spin"></span>Claude กำลังอ่านและสรุป '+selIdxs.length+' articles...','');
+
+  var items=selIdxs.map(function(i){return rssFeedItems[i];});
+  var newCards=[];
+  var srcDomain='';
+  try{srcDomain=new URL(document.getElementById('rss-url').value).hostname.replace('www.','');}catch(e){}
+
+  for(var i=0;i<items.length;i++){
+    var it=items[i];
+    setStatus('rss-status','<span class="spin"></span>กำลังสรุป ('+(i+1)+'/'+items.length+'): '+it.title.slice(0,50)+'...','');
+    try{
+      var prompt='คุณเป็น senior marketing strategist ชาวไทยที่ทำงานให้ Hakuhodo Bangkok\n\nบทความ:\nTitle: '+it.title+'\nURL: '+it.link+'\nDate: '+it.pubDate+'\nExcerpt: '+it.desc+'\n\nสรุปในรูปแบบ JSON เท่านั้น ไม่มี markdown:\n{\n  "headline": "หัวข้อภาษาไทยกระชับ ไม่เกิน 80 ตัวอักษร",\n  "summary": "สรุปเนื้อหา 2-3 ประโยคภาษาไทย",\n  "insight": "Strategic insight สำหรับ marketing agency ในไทย 1-2 ประโยค",\n  "cat": "หนึ่งใน: marketing / media / business / thailand / branding / economics / gadgets / ai / social / agency",\n  "flag": "🇹🇭 หรือ 🌐"\n}';
+      var raw=await callClaude(prompt);
+      var clean=raw.replace(/```json|```/g,'').trim();
+      var obj=JSON.parse(clean);
+      var catColors={marketing:'#ff9500',media:'#4a9eff',business:'#3dcc6e',thailand:'#ff6b35',branding:'#b06eff',economics:'#6c63ff',gadgets:'#00d4cc',ai:'#ff3366',social:'#ffd600',agency:'#8e8e93'};
+      var catLabels={marketing:'MARKETING',media:'MEDIA & TECH',business:'BUSINESS',thailand:'THAILAND LOCAL',branding:'BRANDING',economics:'ECONOMICS',gadgets:'GADGETS & TECH',ai:'AI USE CASES',social:'SOCIAL & VIRAL',agency:'AGENCY MOVES'};
+      var now=new Date();
+      var ts=now.getDate()+'/'+(now.getMonth()+1)+'/'+now.getFullYear()+' '+now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
+      var newId=Date.now()+i;
+      newCards.push({
+        id:newId,cat:obj.cat||'media',cl:catLabels[obj.cat]||'MEDIA & TECH',fl:obj.flag||'🌐',or:obj.flag==='🇹🇭'?'thai':'intl',
+        img:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=480&h=240&fit=crop',
+        ts:ts+' · '+srcDomain,
+        h:obj.headline||it.title,
+        u:it.link,s:srcDomain||'RSS Import',
+        sm:obj.summary||it.desc,
+        ins:obj.insight||'—'
+      });
+    }catch(err){
+      newCards.push({
+        id:Date.now()+i,cat:'media',cl:'MEDIA & TECH',fl:'🌐',or:'intl',
+        img:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=480&h=240&fit=crop',
+        ts:new Date().toLocaleDateString('th-TH'),
+        h:it.title,u:it.link,s:srcDomain||'RSS Import',
+        sm:it.desc,ins:'—'
+      });
+    }
+  }
+
+  // Prepend to DATA
+  for(var j=newCards.length-1;j>=0;j--) DATA.unshift(newCards[j]);
+  updCnt();render();
+
+  setStatus('rss-status','✅ เพิ่ม '+newCards.length+' articles เข้า portal แล้ว!','ok');
+  btn.disabled=false;
+  setTimeout(function(){closeModal('modal-import');},1400);
+}
+
+// ══ ADD SINGLE URL ══
+async function addArticle(){
+  var url=document.getElementById('add-url').value.trim();
+  if(!url||!/^https?:\/\//.test(url)){setStatus('add-status','⚠️ URL ไม่ถูกต้อง ต้องขึ้นต้นด้วย https://','err');return;}
+  var btn=document.getElementById('add-btn');
+  btn.disabled=true;
+  setStatus('add-status','<span class="spin"></span>Claude กำลังอ่าน URL และเขียนสรุป...','');
+
+  try{
+    // Fetch page content via proxy
+    var r=await fetch(proxyUrl(url));
+    var d=await r.json();
+    var html=d.contents||'';
+    // Strip tags, get text
+    var tmp=document.createElement('div');tmp.innerHTML=html;
+    var text=(tmp.textContent||tmp.innerText||'').replace(/\s+/g,' ').trim().slice(0,2000);
+
+    var srcDomain='';
+    try{srcDomain=new URL(url).hostname.replace('www.','');}catch(e){}
+
+    var prompt='คุณเป็น senior marketing strategist ชาวไทยที่ทำงานให้ Hakuhodo Bangkok\n\nURL: '+url+'\nเนื้อหาบทความ (ตัดย่อ):\n'+text+'\n\nสรุปในรูปแบบ JSON เท่านั้น ไม่มี markdown หรือข้อความอื่น:\n{\n  "headline": "หัวข้อภาษาไทยกระชับ ไม่เกิน 90 ตัวอักษร ถ้าเป็นข่าวต่างประเทศใส่ภาษาอังกฤษบ้าง",\n  "summary": "สรุปเนื้อหา 2-3 ประโยคภาษาไทย อ่านแล้วเข้าใจได้ทันที",\n  "insight": "Strategic insight สำหรับ marketing agency ในไทย 1-2 ประโยค ระบุว่า relevant กับ client ใด (ThaiBev/AIA/MinorFood/Big C) ถ้าเกี่ยวข้อง",\n  "cat": "หนึ่งใน: marketing / media / business / thailand / branding / economics / gadgets / ai / social / agency",\n  "flag": "🇹🇭 ถ้าเป็นข่าวไทย หรือ 🌐 ถ้าเป็นข่าวต่างประเทศ",\n  "source": "ชื่อ source/สำนักข่าว"\n}';
+
+    var raw=await callClaude(prompt);
+    var clean=raw.replace(/```json|```/g,'').trim();
+    var obj=JSON.parse(clean);
+
+    var catLabels={marketing:'MARKETING',media:'MEDIA & TECH',business:'BUSINESS',thailand:'THAILAND LOCAL',branding:'BRANDING',economics:'ECONOMICS',gadgets:'GADGETS & TECH',ai:'AI USE CASES',social:'SOCIAL & VIRAL',agency:'AGENCY MOVES'};
+    var now=new Date();
+    var ts=now.getDate()+'/'+(now.getMonth()+1)+'/'+now.getFullYear()+' '+now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
+
+    var card={
+      id:Date.now(),
+      cat:obj.cat||'media',
+      cl:catLabels[obj.cat]||'MEDIA & TECH',
+      fl:obj.flag||'🌐',
+      or:obj.flag==='🇹🇭'?'thai':'intl',
+      img:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=480&h=240&fit=crop',
+      ts:ts+' · '+(obj.source||srcDomain),
+      h:obj.headline||'Article from '+srcDomain,
+      u:url,
+      s:obj.source||srcDomain,
+      sm:obj.summary||text.slice(0,200),
+      ins:obj.insight||'—'
+    };
+
+    DATA.unshift(card);
+    updCnt();render();
+    setStatus('add-status','✅ เพิ่มแล้ว: "'+card.h.slice(0,50)+'..."','ok');
+    setTimeout(function(){closeModal('modal-add');},1400);
+  }catch(err){
+    setStatus('add-status','❌ Error: '+err.message+'\n\nลอง URL อื่น หรือ paste เนื้อหาบทความมาแทน','err');
+    btn.disabled=false;
+  }
+}
+
+// Enter key support
+document.getElementById('rss-url').addEventListener('keydown',function(e){if(e.key==='Enter')fetchRSS();});
+document.getElementById('add-url').addEventListener('keydown',function(e){if(e.key==='Enter')addArticle();});
+</script>
+</body>
+</html>
